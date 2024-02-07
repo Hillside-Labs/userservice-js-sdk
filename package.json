@@ -1,0 +1,19 @@
+{
+  "name": "userservice-js-sdk",
+  "version": "1.0.0",
+  "description": "Userup JS client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hillside-Labs/userservice-js-sdk.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hillside-Labs/userservice-js-sdk/issues"
+  },
+  "homepage": "https://github.com/Hillside-Labs/userservice-js-sdk#readme"
+}

@@ -1,0 +1,255 @@
+openapi: 3.0.0
+info:
+  title: User Service API
+  version: 1.0.0
+paths:
+  /users/:
+    get:
+      summary: Get all users
+      responses:
+        '200':
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      summary: Create a new user
+      requestBody:
+        description: The user data to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: The created user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /users/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        description: Unique identifier of the user
+    get:
+      summary: Get a user by ID
+      responses:
+        '200':
+          description: The user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    put:
+      summary: Update a user by ID
+      responses:
+        '200':
+          description: The updated user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    delete:
+      summary: Delete a user by ID
+      responses:
+        '200':
+          description: Success message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+  /users/{id}/attributes:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        description: Unique identifier of the user
+    get:
+      summary: Get all attributes of a user
+      responses:
+        '200':
+          description: A list of attributes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Attribute'
+    post:
+      summary: Create new attributes for a user
+      parameters:
+        - in: path
+          name: id
+          description: ID of the user to add attributes to
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Attributes to be added to the user
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Attribute'
+      responses:
+        '201':
+          description: The created attribute
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attribute'
+  /users/{id}/attributes/{name}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        description: Unique identifier of the user
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        description: Name of the attribute
+    get:
+      summary: Get an attribute of a user by name
+      responses:
+        '200':
+          description: The attribute
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attribute'
+    put:
+      summary: Update an attribute of a user by name
+      responses:
+        '200':
+          description: The updated attribute
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attribute'
+    delete:
+      summary: Delete an attribute of a user by name
+      responses:
+        '200':
+          description: Success message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+  /users/{id}/traits:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        description: Unique identifier of the user
+    get:
+      summary: Get all traits of a user
+      responses:
+        '200':
+          description: A list of traits
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trait'
+    post:
+      summary: Create new traits for a user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trait'
+      responses:
+        '201':
+          description: The created trait
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trait'
+  /users/{id}/traits/{name}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        description: Unique identifier of the user
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        description: Name of the trait
+    get:
+      summary: Get a trait of a user by name
+      responses:
+        '200':
+          description: The trait
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trait'
+    put:
+      summary: Update a trait of a user by name
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trait'
+      responses:
+        '200':
+          description: The updated trait
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trait'
+    delete:
+      summary: Delete a trait of a user by name
+      responses:
+        '200':
+          description: Success message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        ID:
+          type: integer
+        Username:
+          type: string
+    Attribute:
+      type: object
+      additionalProperties: true
+    Trait:
+      type: object
+      additionalProperties: true

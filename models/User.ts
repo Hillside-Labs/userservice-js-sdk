@@ -30,7 +30,7 @@ export interface User {
      * @type {string}
      * @memberof User
      */
-    name?: string;
+    username?: string;
 }
 
 /**
@@ -53,7 +53,7 @@ export function UserFromJSONTyped(json: any, ignoreDiscriminator: boolean): User
     return {
         
         'iD': !exists(json, 'ID') ? undefined : json['ID'],
-        'name': !exists(json, 'Name') ? undefined : json['Name'],
+        'username': !exists(json, 'Username') ? undefined : json['Username'],
     };
 }
 
@@ -67,7 +67,7 @@ export function UserToJSON(value?: User | null): any {
     return {
         
         'ID': value.iD,
-        'Name': value.name,
+        'Username': value.username,
     };
 }
 

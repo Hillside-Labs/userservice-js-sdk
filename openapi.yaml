@@ -90,6 +90,21 @@ paths:
                   $ref: '#/components/schemas/Attribute'
     post:
       summary: Create new attributes for a user
+      parameters:
+        - in: path
+          name: id
+          description: ID of the user to add attributes to
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Attributes to be added to the user
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Attribute'
       responses:
         '201':
           description: The created attribute
@@ -230,7 +245,7 @@ components:
       properties:
         ID:
           type: integer
-        Name:
+        Username:
           type: string
     Attribute:
       type: object

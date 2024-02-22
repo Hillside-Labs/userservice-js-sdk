@@ -46,6 +46,7 @@ export interface UsersIdAttributesNamePutRequest {
 
 export interface UsersIdAttributesPostRequest {
     id: number;
+    requestBody: { [key: string]: any; };
 }
 
 export interface UsersIdDeleteRequest {
@@ -260,15 +261,22 @@ export class DefaultApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling usersIdAttributesPost.');
         }
 
+        if (requestParameters.requestBody === null || requestParameters.requestBody === undefined) {
+            throw new runtime.RequiredError('requestBody','Required parameter requestParameters.requestBody was null or undefined when calling usersIdAttributesPost.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         const response = await this.request({
             path: `/users/{id}/attributes`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: requestParameters.requestBody,
         }, initOverrides);
 
         return new runtime.JSONApiResponse<any>(response);

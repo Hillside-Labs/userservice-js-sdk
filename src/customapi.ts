@@ -14,7 +14,7 @@ async function main() {
         console.log('User created successfully:', createUserResponse)
         const getUsersResponse = await api.usersGet()
         console.log('List of users:', getUsersResponse)
-
+        
         const req2 :UsersIdAttributesPostRequest = {
             id: 1,
             requestBody: {

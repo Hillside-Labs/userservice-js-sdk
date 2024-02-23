@@ -15,10 +15,13 @@
 
 import * as runtime from '../runtime';
 import type {
+  Event,
   User,
   UsersIdDelete200Response,
 } from '../models/index';
 import {
+    EventFromJSON,
+    EventToJSON,
     UserFromJSON,
     UserToJSON,
     UsersIdDelete200ResponseFromJSON,
@@ -42,6 +45,7 @@ export interface UsersIdAttributesNameGetRequest {
 export interface UsersIdAttributesNamePutRequest {
     id: number;
     name: string;
+    requestBody: { [key: string]: any; };
 }
 
 export interface UsersIdAttributesPostRequest {
@@ -53,12 +57,18 @@ export interface UsersIdDeleteRequest {
     id: number;
 }
 
+export interface UsersIdEventsPostRequest {
+    id: number;
+    event: Event;
+}
+
 export interface UsersIdGetRequest {
     id: number;
 }
 
 export interface UsersIdPutRequest {
     id: number;
+    user: User;
 }
 
 export interface UsersIdTraitsGetRequest {
@@ -231,15 +241,22 @@ export class DefaultApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('name','Required parameter requestParameters.name was null or undefined when calling usersIdAttributesNamePut.');
         }
 
+        if (requestParameters.requestBody === null || requestParameters.requestBody === undefined) {
+            throw new runtime.RequiredError('requestBody','Required parameter requestParameters.requestBody was null or undefined when calling usersIdAttributesNamePut.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         const response = await this.request({
             path: `/users/{id}/attributes/{name}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))).replace(`{${"name"}}`, encodeURIComponent(String(requestParameters.name))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
+            body: requestParameters.requestBody,
         }, initOverrides);
 
         return new runtime.JSONApiResponse<any>(response);
@@ -321,6 +338,43 @@ export class DefaultApi extends runtime.BaseAPI {
     }
 
     /**
+     * Create a new event for a user
+     */
+    async usersIdEventsPostRaw(requestParameters: UsersIdEventsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Event>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling usersIdEventsPost.');
+        }
+
+        if (requestParameters.event === null || requestParameters.event === undefined) {
+            throw new runtime.RequiredError('event','Required parameter requestParameters.event was null or undefined when calling usersIdEventsPost.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/users/{id}/events`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: EventToJSON(requestParameters.event),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => EventFromJSON(jsonValue));
+    }
+
+    /**
+     * Create a new event for a user
+     */
+    async usersIdEventsPost(requestParameters: UsersIdEventsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Event> {
+        const response = await this.usersIdEventsPostRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Get a user by ID
      */
     async usersIdGetRaw(requestParameters: UsersIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<User>> {
@@ -358,15 +412,22 @@ export class DefaultApi extends runtime.BaseAPI {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling usersIdPut.');
         }
 
+        if (requestParameters.user === null || requestParameters.user === undefined) {
+            throw new runtime.RequiredError('user','Required parameter requestParameters.user was null or undefined when calling usersIdPut.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         const response = await this.request({
             path: `/users/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
+            body: UserToJSON(requestParameters.user),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UserFromJSON(jsonValue));

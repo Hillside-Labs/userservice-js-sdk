@@ -31,6 +31,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+  /users/{id}/events:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        description: Unique identifier of the user
+    post:
+      summary: Create a new event for a user
+      requestBody:
+        description: The event data to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        '201':
+          description: The created event
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
   /users/{id}:
     parameters:
       - in: path
@@ -50,6 +74,13 @@ paths:
                 $ref: '#/components/schemas/User'
     put:
       summary: Update a user by ID
+      requestBody:
+        description: The user data to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
       responses:
         '200':
           description: The updated user
@@ -137,6 +168,13 @@ paths:
                 $ref: '#/components/schemas/Attribute'
     put:
       summary: Update an attribute of a user by name
+      requestBody:
+        description: Attributes to be added to the user
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Attribute'
       responses:
         '200':
           description: The updated attribute
@@ -247,6 +285,35 @@ components:
           type: integer
         Username:
           type: string
+    Event:
+      type: object
+      required:
+        - specversion
+        - type
+        - source
+        - id
+        - time
+      properties:
+        specversion:
+          type: string
+        type:
+          type: string
+        source:
+          type: string
+        id:
+          type: string
+        time:
+          type: string
+          format: date-time
+        datacontenttype:
+          type: string
+        dataschema:
+          type: string
+        subject:
+          type: string
+        data:
+          type: object
+          additionalProperties: true
     Attribute:
       type: object
       additionalProperties: true

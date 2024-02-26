@@ -1,11 +1,12 @@
 {
   "name": "userservice-js-sdk",
   "version": "1.0.0",
-  "description": "Userup JS client",
+  "description": "Userup JS SDK client",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
+    "prepublish": "tsc",
     "start": "npm run build && node dist/src/customapi.js"
   },
   "repository": {

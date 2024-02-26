@@ -1,4 +1,4 @@
-# Typescript SDK for [UserUp](userup.io)
+# Typescript SDK for [UserUp](https://userup.io)
 Our OpenAPI Specification is present in openapi.yaml
 
 ## Quickstart:

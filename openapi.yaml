@@ -5,6 +5,7 @@ info:
 paths:
   /users/:
     get:
+      operationId: GetAllUsers
       summary: Get all users
       responses:
         '200':
@@ -16,6 +17,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/User'
     post:
+      operationId: CreateUser
       summary: Create a new user
       requestBody:
         description: The user data to be created
@@ -40,6 +42,7 @@ paths:
           type: integer
         description: Unique identifier of the user
     post:
+      operationId: CreateEvent
       summary: Create a new event for a user
       requestBody:
         description: The event data to be created
@@ -64,6 +67,7 @@ paths:
           type: integer
         description: Unique identifier of the user
     get:
+      operationId: GetUser
       summary: Get a user by ID
       responses:
         '200':
@@ -73,6 +77,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
     put:
+      operationId: UpdateUser
       summary: Update a user by ID
       requestBody:
         description: The user data to be created
@@ -89,6 +94,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
     delete:
+      operationId: DeleteUser
       summary: Delete a user by ID
       responses:
         '200':
@@ -109,6 +115,7 @@ paths:
           type: integer
         description: Unique identifier of the user
     get:
+      operationId: GetAttributes
       summary: Get all attributes of a user
       responses:
         '200':
@@ -120,6 +127,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Attribute'
     post:
+      operationId: CreateAttributes
       summary: Create new attributes for a user
       parameters:
         - in: path
@@ -158,6 +166,7 @@ paths:
           type: string
         description: Name of the attribute
     get:
+      operationId: GetAttributeByName
       summary: Get an attribute of a user by name
       responses:
         '200':
@@ -167,6 +176,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Attribute'
     put:
+      operationId: UpdateAttributeByName
       summary: Update an attribute of a user by name
       requestBody:
         description: Attributes to be added to the user
@@ -183,6 +193,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Attribute'
     delete:
+      operationId: DeleteAttributeByName
       summary: Delete an attribute of a user by name
       responses:
         '200':
@@ -203,6 +214,7 @@ paths:
           type: integer
         description: Unique identifier of the user
     get:
+      operationId: GetAllTraits
       summary: Get all traits of a user
       responses:
         '200':
@@ -214,6 +226,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Trait'
     post:
+      operationId: CreateTraits
       summary: Create new traits for a user
       requestBody:
         content:
@@ -242,6 +255,7 @@ paths:
           type: string
         description: Name of the trait
     get:
+      operationId: GetTraitByName
       summary: Get a trait of a user by name
       responses:
         '200':
@@ -251,6 +265,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Trait'
     put:
+      operationId: UpdateTraitByName
       summary: Update a trait of a user by name
       requestBody:
         content:
@@ -265,6 +280,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Trait'
     delete:
+      operationId: DeleteTraitByName
       summary: Delete a trait of a user by name
       responses:
         '200':
